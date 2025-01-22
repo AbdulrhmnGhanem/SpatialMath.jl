@@ -11,11 +11,19 @@
     }
   },
   "features": {
-    "ghcr.io/devcontainers/features/python:1": {},
     "ghcr.io/julialang/devcontainer-features/julia:1": {},
-    "ghcr.io/prulloac/devcontainer-features/pre-commit:1": {}
+    "ghcr.io/prulloac/devcontainer-features/pre-commit:1": {},
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+      "packages": [
+        "git-delta",
+        "neovim",
+        "gnupg2",
+        "sudo"
+      ],
+      "upgradePackages": true
+    }
   },
-  "image": "mcr.microsoft.com/devcontainers/base:jammy",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
   "name": "SpatialMath.jl",
   "postCreateCommand": "julia -E \"using Pkg; Pkg.add([\\\"JuliaFormatter\\\", \\\"ExplicitImports\\\"])\" && julia --project=. -E \"using Pkg; Pkg.build()\""
 }
