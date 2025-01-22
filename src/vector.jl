@@ -41,5 +41,80 @@ function isunittwist2(v; atol = eps(Float64), rtol = eps(Float64))
          (iszerovec(v[3]; atol, rtol) && isunitvec(v[1:2]; atol, rtol))
 end
 
-export unitvec, isunitvec, normsq, iszerovec, isunittwist, isunittwist2
+function unittwist(S; atol = eps(Float64), rtol = eps(Float64))
+  if iszerovec(S; atol, rtol)
+    return nothing
+  end
+  v = S[1:3]
+  w = S[4:6]
+
+  if iszerovec(w; atol, rtol)
+    th = norm(v)
+  else
+    th = norm(w)
+  end
+
+  return S / th
+end
+
+function unittwist2(S; atol = eps(Float64), rtol = eps(Float64))
+  if iszerovec(S; atol, rtol)
+    return nothing
+  end
+  v = S[1:3]
+  w = S[3]
+
+  if iszerovec(w; atol, rtol)
+    th = norm(v)
+  else
+    th = norm(w)
+  end
+
+  return S / th
+end
+
+
+function unittwist_norm(S; atol = eps(Float64), rtol = eps(Float64))
+  if iszerovec(S; atol, rtol)
+    return (nothing, nothing)
+  end
+
+  v = S[1:3]
+  w = S[4:6]
+
+  if iszerovec(w; atol, rtol)
+    th = norm(v)
+  else
+    th = norm(w)
+  end
+  return (S / th, th)
+end
+
+
+function unittwist2_norm(S; atol = eps(Float64), rtol = eps(Float64))
+  if iszerovec(S; atol, rtol)
+    return (nothing, nothing)
+  end
+
+  v = S[1:3]
+  w = S[3]
+
+  if iszerovec(w; atol, rtol)
+    th = norm(v)
+  else
+    th = norm(w)
+  end
+  return (S / th, th)
+end
+
+export unitvec,
+  isunitvec,
+  normsq,
+  iszerovec,
+  isunittwist,
+  isunittwist2,
+  unittwist,
+  unittwist2,
+  unittwist_norm,
+  unittwist2_norm
 end # module
