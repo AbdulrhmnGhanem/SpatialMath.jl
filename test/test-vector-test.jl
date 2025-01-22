@@ -1,4 +1,6 @@
 using SpatialMath.Vector
+using Symbolics
+using LinearAlgebra
 
 
 @testset "unitvec" begin
@@ -44,4 +46,11 @@ end
   @test normsq([0, 0, 0]) ≈ 0
   @test normsq([1, 2, 3]) ≈ 14
   @test normsq([1, 2, 3]) ≈ 14
+end
+
+@testset "symbolic norm" begin
+  @variables x y
+  v = [x; y]
+  @test isequal(norm(v), sqrt(abs2(y) + abs2(x)))
+  @test isequal(normsq(v), x^2 + y^2)
 end
