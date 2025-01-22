@@ -1,0 +1,11 @@
+# Don't forget to run
+#
+#     pkg> dev ..
+#
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+LiveServer = "16fef848-5104-11e9-1b77-fb7a48bbb589"
+SpatialMath = "657cd90f-b779-50a8-81d7-9e329df4af1b"
+
+[compat]
+Documenter = "1"

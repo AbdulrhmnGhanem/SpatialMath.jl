@@ -1,0 +1,7 @@
+name = "SpatialMath"
+uuid = "657cd90f-b779-50a8-81d7-9e329df4af1b"
+authors = ["AbdulrhmnGhanem <research@abdulrhmnghanem.tech>"]
+version = "0.1.0"
+
+[compat]
+julia = "1.10"
