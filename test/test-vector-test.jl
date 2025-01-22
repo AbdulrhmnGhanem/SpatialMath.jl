@@ -1,7 +1,7 @@
 using SpatialMath.Vector
 
 
-@testset "Unit Vector Tests" begin
+@testset "unitvec" begin
   @test unitvec([1, 0, 0]) ≈ [1, 0, 0]
   @test unitvec([0, 1, 0]) ≈ [0, 1, 0]
   @test unitvec([0, 0, 1]) ≈ [0, 0, 1]
@@ -17,4 +17,31 @@ using SpatialMath.Vector
   @test_throws DomainError unitvec([0, 0, 0])
   @test_throws DomainError unitvec([0])
   @test_throws DomainError unitvec(0)
+end
+
+@testset "isunitvec" begin
+  @test isunitvec([1, 0, 0])
+  @test isunitvec((1, 0, 0))
+  @test isunitvec([1, 0, 0])
+
+  @test !isunitvec([9, 0, 0])
+  @test !isunitvec((9, 0, 0))
+  @test !isunitvec([9, 0, 0])
+
+  @test isunitvec(1)
+  @test isunitvec([1])
+  @test isunitvec(-1)
+  @test isunitvec([-1])
+
+  @test !isunitvec(2)
+  @test !isunitvec([2])
+  @test !isunitvec(-2)
+  @test !isunitvec([-2])
+end
+
+
+@testset "normsq" begin
+  @test normsq([0, 0, 0]) ≈ 0
+  @test normsq([1, 2, 3]) ≈ 14
+  @test normsq([1, 2, 3]) ≈ 14
 end

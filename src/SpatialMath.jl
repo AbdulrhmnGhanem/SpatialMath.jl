@@ -1,3 +1,3 @@
 module SpatialMath
-include("vectors.jl")
+include("vector.jl")
 end
