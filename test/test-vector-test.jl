@@ -54,3 +54,31 @@ end
   @test isequal(norm(v), sqrt(abs2(y) + abs2(x)))
   @test isequal(normsq(v), x^2 + y^2)
 end
+
+@testset "iszerovec" begin
+  @test iszerovec([0])
+  @test iszerovec([0, 0])
+  @test iszerovec([0, 0, 0])
+
+  @test !iszerovec([1])
+  @test !iszerovec([0, 1])
+  @test !iszerovec([0, 1, 0])
+end
+
+@testset "isunittwist" begin
+  @test isunittwist([1, 2, 3, 1, 0, 0])
+  @test isunittwist((1, 2, 3, 1, 0, 0))
+  @test isunittwist([1, 2, 3, 1, 0, 0])
+  @test !isunittwist([1, 2, 3, 1, 0, 1])
+  @test isunittwist([1, 0, 0, 0, 0, 0])
+  @test !isunittwist([2, 0, 0, 0, 0, 0])
+  @test_throws DomainError isunittwist([3, 4])
+end
+
+@testset "isunittwist2" begin
+  @test isunittwist2([1, 2, 1])
+  @test !isunittwist2([1, 2, 3])
+  @test isunittwist2([1, 0, 0])
+  @test !isunittwist2([2, 0, 0])
+  @test_throws DomainError isunittwist2([3, 4])
+end
