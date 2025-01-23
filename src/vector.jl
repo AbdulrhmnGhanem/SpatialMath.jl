@@ -1,5 +1,16 @@
 module Vector
 
+export unitvec,
+  isunitvec,
+  normsq,
+  iszerovec,
+  isunittwist,
+  isunittwist2,
+  unittwist,
+  unittwist2,
+  unittwist_norm,
+  unittwist2_norm
+
 using LinearAlgebra: LinearAlgebra, norm, dot
 
 function unitvec(v)
@@ -106,15 +117,4 @@ function unittwist2_norm(S; atol = eps(Float64), rtol = eps(Float64))
   end
   return (S / th, th)
 end
-
-export unitvec,
-  isunitvec,
-  normsq,
-  iszerovec,
-  isunittwist,
-  isunittwist2,
-  unittwist,
-  unittwist2,
-  unittwist_norm,
-  unittwist2_norm
 end # module
