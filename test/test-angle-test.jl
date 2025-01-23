@@ -32,10 +32,10 @@ end
   @test wrap_mpi2_pi2(0) ≈ 0
   @test wrap_mpi2_pi2(-0.5 * π) ≈ -0.5 * π
   @test wrap_mpi2_pi2(0.5 * π) ≈ 0.5 * π
-  @test_broken wrap_mpi2_pi2(0.6 * π) ≈ 0.4 * π
-  @test_broken wrap_mpi2_pi2(-0.6 * π) ≈ -0.4 * π
-  @test_broken wrap_mpi2_pi2([0, -0.5 * π, 0.5 * π, 0.6 * π, -0.6 * π]) ≈
-               [0, -0.5 * π, 0.5 * π, 0.4 * π, -0.4 * π]
+  @test wrap_mpi2_pi2(0.6 * π) ≈ 0.4 * π
+  @test wrap_mpi2_pi2(-0.6 * π) ≈ -0.4 * π
+  @test wrap_mpi2_pi2([0, -0.5 * π, 0.5 * π, 0.6 * π, -0.6 * π]) ≈
+        [0, -0.5 * π, 0.5 * π, 0.4 * π, -0.4 * π]
 end
 
 
@@ -51,8 +51,8 @@ end
     @test angle_wrap(-θ, mode = :zero22pi) ≈ wrap_0_2pi(-θ)
     @test angle_wrap(θ, mode = :zero2pi) ≈ wrap_0_pi(θ)
     @test angle_wrap(-θ, mode = :zero2pi) ≈ wrap_0_pi(-θ)
-    # @test_broken angle_wrap(θ, mode = :mpi22pi2) ≈ wrap_mpi2_pi2(θ)
-    # @test_broken angle_wrap(-θ, mode = :mpi22pi2) ≈ wrap_mpi2_pi2(-θ)
+    @test angle_wrap(θ, mode = :mpi22pi2) ≈ wrap_mpi2_pi2(θ)
+    @test angle_wrap(-θ, mode = :mpi22pi2) ≈ wrap_mpi2_pi2(-θ)
     @test_throws ArgumentError angle_wrap(θ, mode = :foo)
   end
 end

@@ -25,7 +25,7 @@ function wrap_0_pi(θ)
 end
 
 function wrap_mpi2_pi2(θ)
-  n = θ / 2π
+  n = 2θ / π
   n = trunc.(Int, n)
   y = ifelse.(mod.(n, 2) .== 0, θ - n * π, n * π - θ)
   return length(y) == 1 ? y[1] : y
