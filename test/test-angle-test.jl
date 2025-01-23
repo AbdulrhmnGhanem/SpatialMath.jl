@@ -76,3 +76,13 @@ end
   @test x ≈ [0, 0, 0]
   @test isa(x, Vector{Float64})
 end
+
+@testset "angle_stats" begin
+  θ = range(3π / 2, stop = 5π / 2, length = 50)
+  @test isapprox(angle_mean(θ), 0, atol = 1e-12)
+  @test angle_std(θ) ≈ 0.9717284050981313
+
+  θ = range(π / 2, stop = 3π / 2, length = 50)
+  @test angle_mean(θ) ≈ π
+  @test angle_std(θ) ≈ 0.9717284050981313
+end

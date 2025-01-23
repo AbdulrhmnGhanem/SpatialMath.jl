@@ -1,8 +1,10 @@
 module Angle
 
 using Match: @match
+using Statistics: mean
 
-export wrap_0_2pi, wrap_mpi_pi, wrap_0_pi, wrap_mpi2_pi2, angle_wrap, angle_diff
+export wrap_0_2pi,
+  wrap_mpi_pi, wrap_0_pi, wrap_mpi2_pi2, angle_wrap, angle_diff, angle_std, angle_mean
 
 function wrap_0_2pi(θ)
   y = θ .- 2π .* floor.(θ ./ (2π))
@@ -45,8 +47,18 @@ function angle_diff(a, b = nothing)
   end
 
   y = mod.(a .+ π, 2π) .- π
-
   return length(y) == 1 ? y[1] : y
+end
+
+function angle_std(Θ)
+  X, Y = mean.([cos.(Θ), sin.(Θ)])
+  R = hypot(X, Y)
+  return sqrt(-2log(R))
+end
+
+function angle_mean(Θ)
+  X, Y = mean.([cos.(Θ), sin.(Θ)])
+  return atan(Y, X)
 end
 
 end # module
