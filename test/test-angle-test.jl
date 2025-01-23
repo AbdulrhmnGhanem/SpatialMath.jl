@@ -56,3 +56,23 @@ end
     @test_throws ArgumentError angle_wrap(θ, mode = :foo)
   end
 end
+
+@testset "angle_diff" begin
+  @test isa(angle_diff(0, 0), Float64)
+  @test angle_diff(π, 0) == -π
+  @test angle_diff(-π, π) == 0
+
+  x = angle_diff([0, -π, π], 0)
+  @test x ≈ [0, -π, -π]
+  @test isa(x, Vector{Float64})
+  @test angle_diff([0, -π, π], π) ≈ [-π, 0, 0]
+
+  x = angle_diff(0, [0, -π, π])
+  @test x ≈ [0, -π, -π]
+  @test isa(x, Vector{Float64})
+  @test angle_diff(π, [0, -π, π]) ≈ [-π, 0, 0]
+
+  x = angle_diff([1, 2, 3], [1, 2, 3])
+  @test x ≈ [0, 0, 0]
+  @test isa(x, Vector{Float64})
+end

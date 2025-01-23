@@ -2,7 +2,7 @@ module Angle
 
 using Match: @match
 
-export wrap_0_2pi, wrap_mpi_pi, wrap_0_pi, wrap_mpi2_pi2, angle_wrap
+export wrap_0_2pi, wrap_mpi_pi, wrap_0_pi, wrap_mpi2_pi2, angle_wrap, angle_diff
 
 function wrap_0_2pi(θ)
   y = θ .- 2π .* floor.(θ ./ (2π))
@@ -37,6 +37,16 @@ function angle_wrap(θ; mode = :mpi2pi)
     :mpi22pi2 => wrap_mpi2_pi2(θ)
     _ => throw(ArgumentError("Invalid mode: $mode"))
   end
+end
+
+function angle_diff(a, b = nothing)
+  if !isnothing(b)
+    a = a .- b
+  end
+
+  y = mod.(a .+ π, 2π) .- π
+
+  return length(y) == 1 ? y[1] : y
 end
 
 end # module
