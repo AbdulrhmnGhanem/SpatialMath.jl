@@ -1,8 +1,8 @@
 module Geometry2D
 
-using LinearAlgebra: cross
+using LinearAlgebra: cross, dot
 
-export Line2
+export Line2, join_points, general_line, contains
 
 struct Line2{T} <: AbstractVector{T}
   a::T
@@ -31,11 +31,20 @@ function join_points(
   return Line2(cross(_p1, _p2))
 end
 
-"""
-    general_line(m::Number, c::Number)
-    Creates a line from the parameters of the general line `y = mx + c`.
-"""
 function general_line(m::Number, c::Number)::Line2
   return Line2(m, -1, c)
 end
+
+function contains(l::Line2, p::AbstractVector{T}) where {T<:Number}
+  length(p) in (2, 3) ||
+    throw(DimensionMismatch("p must has homogeneous line representation: ax + by + c = 0"))
+
+  _p = length(p) == 2 ? vcat(p, 1) : p
+  return dot(l, _p) ≈ 0
 end
+
+function intersect(l1::Line2, l2::Line2)
+  c = cross(l1, l2)
+  return abs(c[end]) > 0
+end
+end  # module
